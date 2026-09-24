@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Lookup Tool - Check IP Address Location Instantly</title>
+    <meta name="description" content="Free online IP geolocation lookup tool. Find country, region, city, ISP and more for any IP address.">
+    <meta name="keywords" content="IP lookup,IP location,IP address lookup,IP geolocation,find my IP">
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="index_en.html">
+    <link rel="alternate" hreflang="ja" href="index_ja.html">
+    <link rel="alternate" hreflang="ko" href="index_ko.html">
+    <link rel="alternate" hreflang="ru" href="index_ru.html">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switcher">
+            <span>🌐 Language:</span>
+            <a href="index.html" hreflang="zh">中文</a>
+            <a href="index_en.html" class="active" hreflang="en">English</a>
+            <a href="index_ja.html" hreflang="ja">日本語</a>
+            <a href="index_ko.html" hreflang="ko">한국어</a>
+            <a href="index_ru.html" hreflang="ru">Русский</a>
+        </div>
+
+
+
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index_en.html" class="active">Home</a></li>
+                <li><a href="about_en.html">About</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>🌍 IP Geolocation Lookup</h1>
+            <p class="subtitle">Check detailed location information for any IP address</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="ipInput" placeholder="Enter IP address (e.g. 8.8.8.8)" autocomplete="off">
+                <button id="searchBtn" onclick="queryIP()">
+                    <span class="btn-text">Lookup</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="queryMyIP()">
+                    <span>📍 My IP Address</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Looking up IP information...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="ipInfo" class="ip-info" style="display: none;">
+            <div class="info-header">
+                <h2 id="ipAddress"></h2>
+                <span id="ipType" class="ip-type"></span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">🌏 Country / Region</span>
+                    <span class="info-value" id="country"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 Region / State</span>
+                    <span class="info-value" id="region"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏙️ City</span>
+                    <span class="info-value" id="city"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📮 Postal Code</span>
+                    <span class="info-value" id="zip"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🌐 ISP</span>
+                    <span class="info-value" id="isp"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏢 Organization</span>
+                    <span class="info-value" id="org"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📡 Coordinates</span>
+                    <span class="info-value" id="location"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⏰ Timezone</span>
+                    <span class="info-value" id="timezone"></span>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <h3>🗺️ Geolocation</h3>
+                <div id="mapLink" class="map-link"></div>
+            </div>
+        </div>
+
+
+
+        <div class="instructions">
+            <h3>📖 How to Use</h3>
+            <ul>
+                <li>Enter an IP address in the input field (IPv4 format supported)</li>
+                <li>Click the "Lookup" button to get geolocation details</li>
+                <li>Click "My IP Address" to quickly check your current public IP</li>
+                <li>Results include: country, region, city, ISP, coordinates, timezone and more</li>
+                <li>Map links to Google Maps and OpenStreetMap are provided</li>
+            </ul>
+            <div class="api-notice">
+                <strong>Note:</strong> This tool uses a free API service. Results are for reference only.
+            </div>
+        </div>
+
+        <footer>
+            <p>Data source: <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">IPinfo.io</a></p>
+            <p>© 2026 IP Geolocation Lookup Tool | <a href="about_en.html">About Us</a> | <a href="https://kixtools.com" target="_blank" rel="noopener noreferrer">kixtools Free Tools</a> | <a href="privacy_en.html">Privacy Policy</a></p>
+        </footer>
+    </div>
+
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>
+            <strong>Cookie Consent</strong> |
+            We use cookies and similar technologies to improve your browsing experience, analyze site traffic, and serve personalized advertisements. By continuing to use this site, you agree to our
+            <a href="privacy_en.html" target="_blank">Privacy Policy</a>.
+        </p>
+        <button id="cookieAccept">Accept</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

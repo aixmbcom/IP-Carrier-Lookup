@@ -1,0 +1,875 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 顶部导航样式 */
+.top-nav {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 12px 24px;
+}
+
+.top-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-nav li {
+    margin: 0;
+}
+
+.top-nav a {
+    display: block;
+    padding: 10px 20px;
+    color: #050505;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.top-nav a:hover {
+    background: #f0f2f5;
+    color: #1877f2;
+}
+
+.top-nav a.active {
+    background: #e7f3ff;
+    color: #1877f2;
+    font-weight: 600;
+}
+
+.top-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 3px;
+    background: #1877f2;
+    border-radius: 2px 2px 0 0;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    background: white;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2em;
+    color: #1877f2;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 0.95em;
+    color: #65676b;
+    font-weight: 400;
+}
+
+/* 搜索区域 */
+.search-section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+#ipInput {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s;
+    background: #f0f2f5;
+    color: #050505;
+}
+
+#ipInput:focus {
+    background: white;
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.1);
+}
+
+#ipInput::placeholder {
+    color: #8a8d91;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+button:hover {
+    background: #166fe5;
+}
+
+button:active {
+    background: #1564d6;
+    transform: scale(0.98);
+}
+
+.btn-icon {
+    font-size: 1em;
+}
+
+.quick-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-secondary {
+    background: #e4e6eb;
+    color: #050505;
+}
+
+.btn-secondary:hover {
+    background: #d8dadf;
+}
+
+.btn-secondary:active {
+    background: #ced0d4;
+}
+
+/* 加载动画 */
+.loading {
+    background: white;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.loading p {
+    color: #1877f2;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 16px;
+    border: 3px solid #e4e6eb;
+    border-top: 3px solid #1877f2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 错误提示 */
+.error {
+    background: #ffebe9;
+    border: 1px solid #f02849;
+    color: #c41c00;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* IP信息显示 */
+.ip-info {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e4e6eb;
+}
+
+.info-header h2 {
+    color: #050505;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.ip-type {
+    padding: 6px 12px;
+    background: #e7f3ff;
+    color: #1877f2;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-item {
+    padding: 16px;
+    background: #f0f2f5;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.info-item:hover {
+    background: #e4e6eb;
+}
+
+.info-label {
+    font-size: 0.85em;
+    color: #65676b;
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 1em;
+    color: #050505;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+/* 地图容器 */
+.map-container {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e4e6eb;
+}
+
+.map-container h3 {
+    color: #050505;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.map-link {
+    padding: 12px;
+    background: #f0f2f5;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+
+.map-link p {
+    color: #65676b;
+    margin-bottom: 8px;
+}
+
+.map-link a {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.map-link a:hover {
+    text-decoration: underline;
+}
+
+/* 使用说明 */
+.instructions {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.instructions h3 {
+    color: #1877f2;
+    margin-bottom: 16px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.instructions ul {
+    list-style-position: inside;
+    margin-bottom: 16px;
+    color: #65676b;
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+.instructions li {
+    padding: 4px 0;
+    color: #050505;
+}
+
+.api-notice {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #856404;
+}
+
+.api-notice strong {
+    color: #050505;
+}
+
+.api-notice a {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.api-notice a:hover {
+    text-decoration: underline;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #65676b;
+    font-size: 0.85em;
+}
+
+footer p {
+    margin: 4px 0;
+}
+
+footer a {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* 内容页面样式 (关于页面和隐私政策页面) */
+.content-section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.content-section p {
+    color: #050505;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    color: #1877f2;
+    margin: 24px 0 16px 0;
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.content-section h3 {
+    color: #050505;
+    margin: 16px 0 12px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.content-section h4 {
+    color: #050505;
+    margin: 12px 0 8px 0;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.content-section ul {
+    margin: 12px 0 16px 24px;
+    line-height: 1.8;
+}
+
+.content-section li {
+    color: #050505;
+    margin: 8px 0;
+}
+
+.content-section a {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.content-section a:hover {
+    text-decoration: underline;
+}
+
+.policy-section,
+.about-section {
+    margin-bottom: 32px;
+}
+
+.last-updated {
+    color: #65676b;
+    font-size: 0.9em;
+    margin-bottom: 24px;
+    padding: 12px;
+    background: #f0f2f5;
+    border-radius: 6px;
+}
+
+.policy-notice,
+.disclaimer {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+}
+
+.policy-notice p,
+.disclaimer ul {
+    color: #856404;
+    margin: 0;
+}
+
+.policy-notice strong {
+    color: #050505;
+}
+
+.back-link {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e4e6eb;
+    text-align: center;
+}
+
+.back-link a {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #e4e6eb;
+    color: #050505;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.back-link a:hover {
+    background: #d8dadf;
+}
+
+/* 功能网格 */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.feature-item {
+    padding: 20px;
+    background: #f0f2f5;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.feature-item:hover {
+    background: #e4e6eb;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    font-size: 2em;
+    margin-bottom: 12px;
+}
+
+.feature-item h3 {
+    color: #1877f2;
+    font-size: 1.1em;
+    margin: 12px 0 8px 0;
+}
+
+.feature-item p {
+    color: #65676b;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+/* 使用场景列表 */
+.use-cases {
+    list-style: none;
+    margin: 16px 0;
+    padding: 0;
+}
+
+.use-cases li {
+    padding: 12px;
+    background: #f0f2f5;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.use-cases strong {
+    color: #1877f2;
+}
+
+/* 更新日志 */
+.changelog {
+    margin: 16px 0;
+}
+
+.changelog-item {
+    padding: 16px;
+    background: #f0f2f5;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    border-left: 4px solid #1877f2;
+}
+
+.changelog-item h4 {
+    color: #1877f2;
+    margin-top: 0;
+}
+
+.changelog-item ul {
+    margin: 8px 0 0 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    /* 导航移动端适配 */
+    .top-nav {
+        padding: 10px 16px;
+    }
+
+    .top-nav ul {
+        gap: 6px;
+    }
+
+    .top-nav a {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .top-nav a.active::after {
+        width: 60%;
+        height: 2px;
+    }
+
+    header {
+        padding: 20px 16px;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    .search-section {
+        padding: 16px;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .instructions {
+        padding: 16px;
+    }
+
+    /* 内容页面移动端优化 */
+    .content-section {
+        padding: 16px;
+    }
+
+    .content-section h2 {
+        font-size: 1.2em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-item {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 小屏幕导航优化 */
+    .top-nav {
+        padding: 8px 12px;
+    }
+
+    .top-nav ul {
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .top-nav a {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    .subtitle {
+        font-size: 0.85em;
+    }
+
+    .info-header h2 {
+        font-size: 1.3em;
+    }
+
+    /* 小屏幕内容页面优化 */
+    .content-section {
+        padding: 12px;
+    }
+
+    .content-section h2 {
+        font-size: 1.1em;
+    }
+
+    .content-section ul {
+        margin-left: 16px;
+    }
+
+    .back-link a {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+}
+
+/* 语言切换器 */
+.lang-switcher {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 12px 24px;
+    text-align: center;
+}
+
+.lang-switcher span {
+    color: #65676b;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.lang-switcher a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 2px;
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.lang-switcher a:hover {
+    background: #e7f3ff;
+    border-color: #1877f2;
+}
+
+.lang-switcher a.active {
+    background: #1877f2;
+    color: white;
+    font-weight: 600;
+}
+
+/* Cookie 同意横幅 */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid #dddfe2;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 9999;
+    flex-wrap: wrap;
+}
+
+.cookie-banner p {
+    color: #050505;
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 800px;
+}
+
+.cookie-banner a {
+    color: #1877f2;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.cookie-banner button {
+    padding: 8px 24px;
+    background: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.cookie-banner button:hover {
+    background: #166fe5;
+}
+
+/* 广告容器 */
+.ad-container {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ad-label {
+    font-size: 0.75em;
+    color: #8a8d91;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.ad-placeholder {
+    background: #f0f2f5;
+    border: 1px dashed #dddfe2;
+    border-radius: 4px;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a8d91;
+    font-size: 0.85em;
+}
+
+/* 响应式 Cookie 横幅 */
+@media (max-width: 768px) {
+    .cookie-banner {
+        padding: 12px 16px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookie-banner p {
+        font-size: 0.85em;
+    }
+
+    .lang-switcher {
+        padding: 10px 16px;
+    }
+
+    .lang-switcher a {
+        padding: 5px 10px;
+        font-size: 0.85em;
+    }
+}

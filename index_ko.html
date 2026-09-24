@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP 주소 조회 도구 - IP 위치 정보를 즉시 확인</title>
+    <meta name="description" content="무료 온라인 IP 지리 위치 조회 도구. 모든 IP 주소의 국가, 지역, 도시, ISP 등을 찾아보세요.">
+    <meta name="keywords" content="IP 조회,IP 위치,IP 주소 조회,IP 지리 위치,내 IP 확인">
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="index_en.html">
+    <link rel="alternate" hreflang="ja" href="index_ja.html">
+    <link rel="alternate" hreflang="ko" href="index_ko.html">
+    <link rel="alternate" hreflang="ru" href="index_ru.html">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switcher">
+            <span>🌐 Language:</span>
+            <a href="index.html" hreflang="zh">中文</a>
+            <a href="index_en.html" hreflang="en">English</a>
+            <a href="index_ja.html" hreflang="ja">日本語</a>
+            <a href="index_ko.html" class="active" hreflang="ko">한국어</a>
+            <a href="index_ru.html" hreflang="ru">Русский</a>
+        </div>
+
+
+
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index_ko.html" class="active">홈</a></li>
+                <li><a href="about_ko.html">소개</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>🌍 IP 지리 위치 조회</h1>
+            <p class="subtitle">모든 IP 주소의 상세 위치 정보 확인</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="ipInput" placeholder="IP 주소 입력 (예: 8.8.8.8)" autocomplete="off">
+                <button id="searchBtn" onclick="queryIP()">
+                    <span class="btn-text">조회</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="queryMyIP()">
+                    <span>📍 내 IP 주소</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>IP 정보 조회 중...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="ipInfo" class="ip-info" style="display: none;">
+            <div class="info-header">
+                <h2 id="ipAddress"></h2>
+                <span id="ipType" class="ip-type"></span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">🌏 국가 / 지역</span>
+                    <span class="info-value" id="country"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 지역 / 주</span>
+                    <span class="info-value" id="region"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏙️ 도시</span>
+                    <span class="info-value" id="city"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📮 우편번호</span>
+                    <span class="info-value" id="zip"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🌐 ISP</span>
+                    <span class="info-value" id="isp"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏢 조직</span>
+                    <span class="info-value" id="org"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📡 좌표</span>
+                    <span class="info-value" id="location"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⏰ 시간대</span>
+                    <span class="info-value" id="timezone"></span>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <h3>🗺️ 위치 정보</h3>
+                <div id="mapLink" class="map-link"></div>
+            </div>
+        </div>
+
+
+
+        <div class="instructions">
+            <h3>📖 사용 방법</h3>
+            <ul>
+                <li>입력 필드에 IP 주소를 입력하세요 (IPv4 형식 지원)</li>
+                <li>「조회」 버튼을 클릭하여 위치 정보를 가져오세요</li>
+                <li>「내 IP 주소」를 클릭하여 현재 공인 IP를 빠르게 확인하세요</li>
+                <li>결과에는 국가, 지역, 도시, ISP, 좌표, 시간대 등이 포함됩니다</li>
+                <li>Google 지도 및 OpenStreetMap 링크가 제공됩니다</li>
+            </ul>
+            <div class="api-notice">
+                <strong>참고:</strong> 이 도구는 무료 API 서비스를 사용합니다. 결과는 참고용입니다.
+            </div>
+        </div>
+
+        <footer>
+            <p>데이터 출처: <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">IPinfo.io</a></p>
+            <p>© 2026 IP 지리 위치 조회 도구 | <a href="about_ko.html">소개</a> | <a href="https://kixtools.com" target="_blank" rel="noopener noreferrer">kixtools무료 도구</a> | <a href="privacy_ko.html">개인정보처리방침</a></p>
+        </footer>
+    </div>
+
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>
+            <strong>쿠키 동의</strong> |
+            당사는 귀하의 브라우징 경험을 개선하고, 사이트 트래픽을 분석하며, 맞춤형 광고를 제공하기 위해 쿠키 및 유사 기술을 사용합니다. 이 사이트를 계속 사용함으로써 귀하는 당사의
+            <a href="privacy_ko.html" target="_blank">개인정보처리방침</a>에 동의하게 됩니다.
+        </p>
+        <button id="cookieAccept">동의</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

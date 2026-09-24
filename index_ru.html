@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструмент поиска IP - Проверка местоположения IP-адреса</title>
+    <meta name="description" content="Бесплатный онлайн-инструмент геолокации IP. Найдите страну, регион, город, провайдера и многое другое для любого IP-адреса.">
+    <meta name="keywords" content="поиск IP,геолокация IP,определение IP,местоположение IP,мой IP">
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="index_en.html">
+    <link rel="alternate" hreflang="ja" href="index_ja.html">
+    <link rel="alternate" hreflang="ko" href="index_ko.html">
+    <link rel="alternate" hreflang="ru" href="index_ru.html">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switcher">
+            <span>🌐 Language:</span>
+            <a href="index.html" hreflang="zh">中文</a>
+            <a href="index_en.html" hreflang="en">English</a>
+            <a href="index_ja.html" hreflang="ja">日本語</a>
+            <a href="index_ko.html" hreflang="ko">한국어</a>
+            <a href="index_ru.html" class="active" hreflang="ru">Русский</a>
+        </div>
+
+
+
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index_ru.html" class="active">Главная</a></li>
+                <li><a href="about_ru.html">О нас</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>🌍 Поиск геолокации IP</h1>
+            <p class="subtitle">Проверьте подробную информацию о местоположении любого IP-адреса</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="ipInput" placeholder="Введите IP-адрес (например, 8.8.8.8)" autocomplete="off">
+                <button id="searchBtn" onclick="queryIP()">
+                    <span class="btn-text">Поиск</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="queryMyIP()">
+                    <span>📍 Мой IP-адрес</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Поиск информации об IP...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="ipInfo" class="ip-info" style="display: none;">
+            <div class="info-header">
+                <h2 id="ipAddress"></h2>
+                <span id="ipType" class="ip-type"></span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">🌏 Страна / Регион</span>
+                    <span class="info-value" id="country"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 Регион / Штат</span>
+                    <span class="info-value" id="region"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏙️ Город</span>
+                    <span class="info-value" id="city"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📮 Почтовый индекс</span>
+                    <span class="info-value" id="zip"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🌐 ISP</span>
+                    <span class="info-value" id="isp"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏢 Организация</span>
+                    <span class="info-value" id="org"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📡 Координаты</span>
+                    <span class="info-value" id="location"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⏰ Часовой пояс</span>
+                    <span class="info-value" id="timezone"></span>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <h3>🗺️ Геолокация</h3>
+                <div id="mapLink" class="map-link"></div>
+            </div>
+        </div>
+
+
+
+        <div class="instructions">
+            <h3>📖 Как использовать</h3>
+            <ul>
+                <li>Введите IP-адрес в поле ввода (поддерживается формат IPv4)</li>
+                <li>Нажмите кнопку "Поиск", чтобы получить данные о геолокации</li>
+                <li>Нажмите "Мой IP-адрес", чтобы быстро проверить текущий публичный IP</li>
+                <li>Результаты включают: страну, регион, город, провайдера, координаты, часовой пояс и многое другое</li>
+                <li>Предоставлены ссылки на Google Maps и OpenStreetMap</li>
+            </ul>
+            <div class="api-notice">
+                <strong>Примечание:</strong> Этот инструмент использует бесплатный API-сервис. Результаты предназначены только для справки.
+            </div>
+        </div>
+
+        <footer>
+            <p>Источник данных: <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">IPinfo.io</a></p>
+            <p>© 2026 Инструмент поиска геолокации IP | <a href="about_ru.html">О нас</a> | <a href="https://kixtools.com" target="_blank" rel="noopener noreferrer">kixtoolsбесплатные инструменты</a> | <a href="privacy_ru.html">Политика конфиденциальности</a></p>
+        </footer>
+    </div>
+
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>
+            <strong>Согласие на использование Cookie</strong> |
+            Мы используем файлы cookie и аналогичные технологии для улучшения вашего опыта просмотра, анализа трафика сайта и показа персонализированной рекламы. Продолжая использовать этот сайт, вы соглашаетесь с нашей
+            <a href="privacy_ru.html" target="_blank">Политикой конфиденциальности</a>.
+        </p>
+        <button id="cookieAccept">Принять</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

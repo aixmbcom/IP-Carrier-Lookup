@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <script defer src="https://umami.aixmb.cn/script.js" data-website-id="451afacc-684a-453a-9709-60d549282e98"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP归属地查询工具 - 快速查询IP地址归属地信息</title>
+    <meta name="description" content="免费在线IP归属地查询工具，支持查询任意IP地址的国家、地区、城市、运营商等详细信息。">
+    <meta name="keywords" content="IP查询,IP归属地,IP地址查询,IP定位,IP地理位置">
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="index_en.html">
+    <link rel="alternate" hreflang="ja" href="index_ja.html">
+    <link rel="alternate" hreflang="ko" href="index_ko.html">
+    <link rel="alternate" hreflang="ru" href="index_ru.html">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 语言切换器 -->
+        <div class="lang-switcher">
+            <span>🌐 Language:</span>
+            <a href="index.html" class="active" hreflang="zh">中文</a>
+            <a href="index_en.html" hreflang="en">English</a>
+            <a href="index_ja.html" hreflang="ja">日本語</a>
+            <a href="index_ko.html" hreflang="ko">한국어</a>
+            <a href="index_ru.html" hreflang="ru">Русский</a>
+        </div>
+
+
+
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>🌍 IP归属地查询</h1>
+            <p class="subtitle">查询IP地址的详细归属地信息</p>
+        </header>
+
+        <!-- 搜索区域 -->
+        <div class="search-section">
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="ipInput"
+                    placeholder="请输入IP地址（如：8.8.8.8）"
+                    autocomplete="off"
+                >
+                <button id="searchBtn" onclick="queryIP()">
+                    <span class="btn-text">查询</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="queryMyIP()">
+                    <span>📍 查询我的IP</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 加载提示 -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>正在查询IP信息...</p>
+        </div>
+
+        <!-- 错误提示 -->
+        <div id="error" class="error" style="display: none;"></div>
+
+        <!-- IP信息显示 -->
+        <div id="ipInfo" class="ip-info" style="display: none;">
+            <div class="info-header">
+                <h2 id="ipAddress"></h2>
+                <span id="ipType" class="ip-type"></span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">🌏 国家/地区</span>
+                    <span class="info-value" id="country"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 省份/州</span>
+                    <span class="info-value" id="region"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏙️ 城市</span>
+                    <span class="info-value" id="city"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📮 邮编</span>
+                    <span class="info-value" id="zip"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🌐 运营商</span>
+                    <span class="info-value" id="isp"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏢 组织</span>
+                    <span class="info-value" id="org"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📡 经纬度</span>
+                    <span class="info-value" id="location"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⏰ 时区</span>
+                    <span class="info-value" id="timezone"></span>
+                </div>
+            </div>
+
+            <!-- 地图容器 -->
+            <div class="map-container">
+                <h3>🗺️ 地理位置</h3>
+                <div id="mapLink" class="map-link"></div>
+            </div>
+        </div>
+
+
+
+        <div class="instructions">
+            <h3>📖 使用说明</h3>
+            <ul>
+                <li>在输入框中输入要查询的IP地址（支持IPv4格式）</li>
+                <li>点击"查询"按钮获取该IP的归属地信息</li>
+                <li>点击"查询我的IP"按钮可以快速查询您当前的IP地址信息</li>
+                <li>查询结果包括：国家、地区、城市、运营商、经纬度、时区等详细信息</li>
+                <li>支持查看IP地理位置的地图链接</li>
+            </ul>
+            <div class="api-notice">
+                <strong>提示：</strong>本工具使用免费API服务，查询结果仅供参考。
+            </div>
+        </div>
+
+        <footer>
+            <p>数据来源：<a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">IPinfo.io</a></p>
+            <p>© 2026 IP归属地查询工具 | <a href="about.html">关于我们</a> | <a href="https://kixtools.com" target="_blank" rel="noopener noreferrer">kixtools免费工具</a> | <a href="privacy.html">隐私政策</a></p>
+        </footer>
+    </div>
+
+    <!-- Cookie 同意横幅 -->
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>
+            <strong>Cookie 使用声明</strong> |
+            我们使用 Cookie 和类似技术来改善您的浏览体验、分析网站流量并投放个性化广告。继续使用本网站即表示您同意我们的
+            <a href="privacy.html" target="_blank">隐私政策</a>。
+        </p>
+        <button id="cookieAccept">同意</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

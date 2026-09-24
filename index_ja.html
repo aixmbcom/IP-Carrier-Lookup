@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPアドレス照会ツール - IPの位置情報を即座に確認</title>
+    <meta name="description" content="無料のオンラインIPジオロケーション照会ツール。任意のIPアドレスの国、地域、都市、ISPなどを検索できます。">
+    <meta name="keywords" content="IP照会,IP位置情報,IPアドレス検索,IPジオロケーション,自分のIP">
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="index_en.html">
+    <link rel="alternate" hreflang="ja" href="index_ja.html">
+    <link rel="alternate" hreflang="ko" href="index_ko.html">
+    <link rel="alternate" hreflang="ru" href="index_ru.html">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switcher">
+            <span>🌐 Language:</span>
+            <a href="index.html" hreflang="zh">中文</a>
+            <a href="index_en.html" hreflang="en">English</a>
+            <a href="index_ja.html" class="active" hreflang="ja">日本語</a>
+            <a href="index_ko.html" hreflang="ko">한국어</a>
+            <a href="index_ru.html" hreflang="ru">Русский</a>
+        </div>
+
+
+
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index_ja.html" class="active">ホーム</a></li>
+                <li><a href="about_ja.html">概要</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1>🌍 IP位置情報照会</h1>
+            <p class="subtitle">IPアドレスの詳細な位置情報を確認</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="ipInput" placeholder="IPアドレスを入力（例: 8.8.8.8）" autocomplete="off">
+                <button id="searchBtn" onclick="queryIP()">
+                    <span class="btn-text">照会</span>
+                    <span class="btn-icon">🔍</span>
+                </button>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-secondary" onclick="queryMyIP()">
+                    <span>📍 自分のIP</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>IP情報を照会中...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="ipInfo" class="ip-info" style="display: none;">
+            <div class="info-header">
+                <h2 id="ipAddress"></h2>
+                <span id="ipType" class="ip-type"></span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">🌏 国 / 地域</span>
+                    <span class="info-value" id="country"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📍 地域 / 州</span>
+                    <span class="info-value" id="region"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏙️ 都市</span>
+                    <span class="info-value" id="city"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📮 郵便番号</span>
+                    <span class="info-value" id="zip"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🌐 ISP</span>
+                    <span class="info-value" id="isp"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">🏢 組織</span>
+                    <span class="info-value" id="org"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">📡 座標</span>
+                    <span class="info-value" id="location"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⏰ タイムゾーン</span>
+                    <span class="info-value" id="timezone"></span>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <h3>🗺️ 位置情報</h3>
+                <div id="mapLink" class="map-link"></div>
+            </div>
+        </div>
+
+
+
+        <div class="instructions">
+            <h3>📖 使い方</h3>
+            <ul>
+                <li>検索フィールドにIPアドレスを入力してください（IPv4形式対応）</li>
+                <li>「照会」ボタンをクリックして位置情報を取得</li>
+                <li>「自分のIP」をクリックして現在のパブリックIPを確認</li>
+                <li>結果には: 国、地域、都市、ISP、座標、タイムゾーンなどが含まれます</li>
+                <li>GoogleマップとOpenStreetMapへのリンクを提供</li>
+            </ul>
+            <div class="api-notice">
+                <strong>注意：</strong>このツールは無料APIサービスを使用しています。結果は参考用です。
+            </div>
+        </div>
+
+        <footer>
+            <p>データ提供元: <a href="https://ipinfo.io" target="_blank" rel="noopener noreferrer">IPinfo.io</a></p>
+            <p>© 2026 IP位置情報照会ツール | <a href="about_ja.html">概要</a> | <a href="https://kixtools.com" target="_blank" rel="noopener noreferrer">kixtools無料ツール</a> | <a href="privacy_ja.html">プライバシーポリシー</a></p>
+        </footer>
+    </div>
+
+    <div id="cookieBanner" class="cookie-banner" style="display: none;">
+        <p>
+            <strong>Cookie の同意</strong> |
+            当社は、閲覧体験の向上、サイトトラフィックの分析、パーソナライズされた広告の配信のために、Cookieおよび類似の技術を使用しています。このサイトを引き続き使用することにより、当社の
+            <a href="privacy_ja.html" target="_blank">プライバシーポリシー</a>に同意したものとみなされます。
+        </p>
+        <button id="cookieAccept">同意する</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
